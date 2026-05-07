@@ -23,53 +23,44 @@ validation {
   }
 }
 
-variable "cpu_alert" {
+variable "alerts" {
+  description = "Container App metric alert settings."
   type = object({
-    enabled     = optional(bool, true)
-    threshold   = optional(number, 80)
-    aggregation = optional(string, "Average")
-    severity    = optional(number, 2)
-    frequency   = optional(string, "PT1M")
-    window_size = optional(string, "PT5M")
-  })
+    cpu = optional(object({
+      enabled     = optional(bool, true)
+      threshold   = optional(number, 80)
+      aggregation = optional(string, "Average")
+      severity    = optional(number, 2)
+      frequency   = optional(string, "PT1M")
+      window_size = optional(string, "PT5M")
+    }), {})
 
-  default = {}
-}
+    memory = optional(object({
+      enabled     = optional(bool, true)
+      threshold   = optional(number, 80)
+      aggregation = optional(string, "Average")
+      severity    = optional(number, 2)
+      frequency   = optional(string, "PT1M")
+      window_size = optional(string, "PT5M")
+    }), {})
 
-variable "memory_alert" {
-  type = object({
-    enabled     = optional(bool, true)
-    threshold   = optional(number, 80)
-    aggregation = optional(string, "Average")
-    severity    = optional(number, 2)
-    frequency   = optional(string, "PT1M")
-    window_size = optional(string, "PT5M")
-  })
+    restart_count = optional(object({
+      enabled     = optional(bool, true)
+      threshold   = optional(number, 3)
+      aggregation = optional(string, "Maximum")
+      severity    = optional(number, 1)
+      frequency   = optional(string, "PT1M")
+      window_size = optional(string, "PT5M")
+    }), {})
 
-  default = {}
-}
-
-variable "restart_count_alert" {
-  type = object({
-    enabled     = optional(bool, true)
-    threshold   = optional(number, 3)
-    aggregation = optional(string, "Maximum")
-    severity    = optional(number, 1)
-    frequency   = optional(string, "PT1M")
-    window_size = optional(string, "PT5M")
-  })
-
-  default = {}
-}
-
-variable "response_time_alert" {
-  type = object({
-    enabled      = optional(bool, true)
-    threshold_ms = optional(number, 2000)
-    aggregation  = optional(string, "Average")
-    severity     = optional(number, 2)
-    frequency    = optional(string, "PT1M")
-    window_size  = optional(string, "PT5M")
+    response_time = optional(object({
+      enabled      = optional(bool, true)
+      threshold_ms = optional(number, 2000)
+      aggregation  = optional(string, "Average")
+      severity     = optional(number, 2)
+      frequency    = optional(string, "PT1M")
+      window_size  = optional(string, "PT5M")
+    }), {})
   })
 
   default = {}

@@ -1,5 +1,5 @@
 resource "azurerm_monitor_metric_alert" "cpu" {
-  count = var.cpu_alert.enabled ? 1 : 0
+  count = var.alerts.cpu.enabled ? 1 : 0
 
   name                = "${var.name}-high-cpu"
   resource_group_name = var.resource_group
@@ -11,17 +11,17 @@ resource "azurerm_monitor_metric_alert" "cpu" {
   target_resource_type     = "Microsoft.App/containerApps"
   target_resource_location = var.location
 
-  severity    = var.cpu_alert.severity
-  frequency   = var.cpu_alert.frequency
-  window_size = var.cpu_alert.window_size
+  severity    = var.alerts.cpu.severity
+  frequency   = var.alerts.cpu.frequency
+  window_size = var.alerts.cpu.window_size
   enabled     = true
 
   criteria {
     metric_namespace = "Microsoft.App/containerApps"
     metric_name      = "CpuPercentage"
-    aggregation      = var.cpu_alert.aggregation
+    aggregation      = var.alerts.cpu.aggregation
     operator         = "GreaterThan"
-    threshold        = var.cpu_alert.threshold
+    threshold        = var.alerts.cpu.threshold
   }
 
   dynamic "action" {
@@ -36,7 +36,7 @@ resource "azurerm_monitor_metric_alert" "cpu" {
 }
 
 resource "azurerm_monitor_metric_alert" "memory" {
-  count = var.memory_alert.enabled ? 1 : 0
+  count = var.alerts.memory.enabled ? 1 : 0
 
   name                = "${var.name}-high-memory"
   resource_group_name = var.resource_group
@@ -48,17 +48,17 @@ resource "azurerm_monitor_metric_alert" "memory" {
   target_resource_type     = "Microsoft.App/containerApps"
   target_resource_location = var.location
 
-  severity    = var.memory_alert.severity
-  frequency   = var.memory_alert.frequency
-  window_size = var.memory_alert.window_size
+  severity    = var.alerts.memory.severity
+  frequency   = var.alerts.memory.frequency
+  window_size = var.alerts.memory.window_size
   enabled     = true
 
   criteria {
     metric_namespace = "Microsoft.App/containerApps"
     metric_name      = "MemoryPercentage"
-    aggregation      = var.memory_alert.aggregation
+    aggregation      = var.alerts.memory.aggregation
     operator         = "GreaterThan"
-    threshold        = var.memory_alert.threshold
+    threshold        = var.alerts.memory.threshold
   }
 
   dynamic "action" {
@@ -73,7 +73,7 @@ resource "azurerm_monitor_metric_alert" "memory" {
 }
 
 resource "azurerm_monitor_metric_alert" "restart_count" {
-  count = var.restart_count_alert.enabled ? 1 : 0
+  count = var.alerts.restart_count.enabled ? 1 : 0
 
   name                = "${var.name}-restart-count"
   resource_group_name = var.resource_group
@@ -85,17 +85,17 @@ resource "azurerm_monitor_metric_alert" "restart_count" {
   target_resource_type     = "Microsoft.App/containerApps"
   target_resource_location = var.location
 
-  severity    = var.restart_count_alert.severity
-  frequency   = var.restart_count_alert.frequency
-  window_size = var.restart_count_alert.window_size
+  severity    = var.alerts.restart_count.severity
+  frequency   = var.alerts.restart_count.frequency
+  window_size = var.alerts.restart_count.window_size
   enabled     = true
 
   criteria {
     metric_namespace = "Microsoft.App/containerApps"
     metric_name      = "RestartCount"
-    aggregation      = var.restart_count_alert.aggregation
+    aggregation      = var.alerts.restart_count.aggregation
     operator         = "GreaterThan"
-    threshold        = var.restart_count_alert.threshold
+    threshold        = var.alerts.restart_count.threshold
   }
 
   dynamic "action" {
@@ -110,7 +110,7 @@ resource "azurerm_monitor_metric_alert" "restart_count" {
 }
 
 resource "azurerm_monitor_metric_alert" "response_time" {
-  count = var.response_time_alert.enabled ? 1 : 0
+  count = var.alerts.response_time.enabled ? 1 : 0
 
   name                = "${var.name}-response-time"
   resource_group_name = var.resource_group
@@ -122,17 +122,17 @@ resource "azurerm_monitor_metric_alert" "response_time" {
   target_resource_type     = "Microsoft.App/containerApps"
   target_resource_location = var.location
 
-  severity    = var.response_time_alert.severity
-  frequency   = var.response_time_alert.frequency
-  window_size = var.response_time_alert.window_size
+  severity    = var.alerts.response_time.severity
+  frequency   = var.alerts.response_time.frequency
+  window_size = var.alerts.response_time.window_size
   enabled     = true
 
   criteria {
     metric_namespace = "Microsoft.App/containerApps"
     metric_name      = "ResponseTime"
-    aggregation      = var.response_time_alert.aggregation
+    aggregation      = var.alerts.response_time.aggregation
     operator         = "GreaterThan"
-    threshold        = var.response_time_alert.threshold_ms
+    threshold        = var.alerts.response_time.threshold_ms
   }
 
   dynamic "action" {
