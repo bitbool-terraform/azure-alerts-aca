@@ -54,7 +54,7 @@ variable "alerts" {
     }), {})
 
     response_time = optional(object({
-      enabled      = optional(bool, true)
+      enabled      = optional(bool, false)
       threshold_ms = optional(number, 2000)
       aggregation  = optional(string, "Average")
       severity     = optional(number, 2)
